@@ -6,22 +6,46 @@ on:
       - main
 
 jobs:
-  extract-data-job:
+  job1:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v4
         name: print M
       - run: echo "hi"
 
-  transform-data-job:
+  job2:
     runs-on: ubuntu-latest
+    needs: job1
     steps:
       - uses: actions/checkout@v4
         name: print M
-      - run: echo "Transforming data..."
-  load-data-job:
+      - run: echo "hello..."
+  job3:
     runs-on: ubuntu-latest
+    needs: job1
     steps:
       - uses: actions/checkout@v4
         name: print M
-      - run: echo "Loading data..."
+      - run: echo "byee..."
+  job4:
+    runs-on: ubuntu-latest
+    needs: job2
+    steps:
+      - uses: actions/checkout@v4
+        name: print M
+      - run: echo "welcomw..."
+  job5:
+    runs-on: ubuntu-latest
+    needs: job3
+    steps:
+      - uses: actions/checkout@v4
+        name: print M
+      - run: echo "heyyy..."
+  job6:
+    runs-on: ubuntu-latest
+    needs: [job4,job5]
+    steps:
+      - uses: actions/checkout@v4
+        name: print M
+      - run: echo "good..."
