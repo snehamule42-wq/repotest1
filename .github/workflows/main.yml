@@ -1,27 +1,40 @@
 name: ETL pipeline
+
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
+
 jobs:
-    extract-data-job:
-            runs-on: ubuntu-latest
-            steps:
-                - name: Checkout code
-                  uses: actions/checkout@v4
-                - name: run extract_data.py
-                  run: python extract_data.py
-    transform-data-job:
-            runs-on: ubuntu-latest
-            steps:
-                - name: Checkout code
-                  uses: actions/checkout@v4
-                - name: run transform_data.py
-                  run: python transform_data.py
-    load-data-job:
-            runs-on: ubuntu-latest
-            steps:
-                - name: Checkout code
-                  uses: actions/checkout@v4
-                - name: run load_data.py
-                  run: python load_data.py
+  extract-data-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: python extract_data.py
+
+  transform-data-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: python transform_data.py
+
+  load-data-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: python load_data.py
